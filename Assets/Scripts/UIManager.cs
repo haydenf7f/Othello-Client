@@ -86,6 +86,12 @@ public class UIManager : MonoBehaviour
         yield return new WaitForSeconds(1);
     }
 
+    private IEnumerator MoveScoreDown() {
+        blackScoreText.rectTransform.LeanMoveY(0, 0.5f);
+        whiteScoreText.rectTransform.LeanMoveY(0, 0.5f);
+        yield return new WaitForSeconds(0.5f);
+    }
+
     private IEnumerator HideOverlay() {
         blackOverlay.rectTransform.LeanAlpha(0, 1);
         yield return new WaitForSeconds(1);
@@ -104,6 +110,7 @@ public class UIManager : MonoBehaviour
 
     public IEnumerator ShowEndScreen() {
         yield return ShowOverlay();
+        yield return MoveScoreDown();
         yield return ScaleUp(winnerText.rectTransform);
         yield return ScaleUp(playAgainButton);
     }
