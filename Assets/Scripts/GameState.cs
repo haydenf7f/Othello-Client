@@ -287,6 +287,4 @@ public class GameState {
             return Player.None;
         }
     }
-
-
 }
