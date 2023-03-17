@@ -9,12 +9,14 @@ public class MenuManager : MonoBehaviour
 {
     public string newGameScene;
 
+
     [Header("Audio Settings")]
     [SerializeField] private float defaultVolume = 0.5f;
     [SerializeField] private TMP_Text masterVolumeTextValue = null;
     [SerializeField] private Slider masterVolumeSlider = null;
 
     [SerializeField] private GameObject confirmationPrompt = null;
+
 
     [Header("Graphics Settings")]
     [SerializeField] private Slider brightnessSlider = null;
@@ -24,13 +26,31 @@ public class MenuManager : MonoBehaviour
     private bool _isFullScreen;
     private float _brightnessLevel;
 
+
     [Space(10)]
     [SerializeField] private TMP_Dropdown qualityDropdown = null;
     [SerializeField] private Toggle fullScreenToggle = null;
     
+
     [Header("Resolutions Dropdown")]
     public TMP_Dropdown resolutionDropdown;
     private Resolution[] resolutions;
+
+    [Space(10)]
+    [Header("Multiplayer")]
+    public static MenuManager instance;
+    public InputField usernameField;
+
+
+    private void Awake() 
+    {
+        if (instance == null) {
+            instance = this;
+        } else if (instance != this) {
+            Debug.Log("Instance already exists, destroying object!");
+            Destroy(this);
+        }
+    }
 
     private void Start()
     {
@@ -53,6 +73,12 @@ public class MenuManager : MonoBehaviour
         resolutionDropdown.AddOptions(options);
         resolutionDropdown.value = currentResolutionIndex;
         resolutionDropdown.RefreshShownValue();
+    }
+
+    public void ConnectToServer() 
+    {
+        usernameField.interactable = false;
+        Client.instance.ConnectToServer();
     }
 
     public void SetResolution(int resolutionIndex)

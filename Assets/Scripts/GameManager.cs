@@ -61,7 +61,7 @@ public class GameManager : MonoBehaviour
     private void OnBoardClicked(Position pos) {
         if (gameState.MakeMove(pos, out MoveInfo moveInfo)) {
             StartCoroutine(OnMoveMade(moveInfo));
-        }  
+        }
     }
 
     private IEnumerator OnMoveMade(MoveInfo moveInfo) {
@@ -127,7 +127,7 @@ public class GameManager : MonoBehaviour
         // Instantiate the disc at the given position and store it in the discs array
         discs[boardPos.Row, boardPos.Column] = Instantiate(prefab, centeredPos, Quaternion.identity);
 
-        Debug.Log("Placing disc at [" + boardPos.Row + ", " + boardPos.Column + "]" + " (" + centeredPos.x + ", " + centeredPos.z + ")");
+        // Debug.Log("Placing disc at [" + boardPos.Row + ", " + boardPos.Column + "]" + " (" + centeredPos.x + ", " + centeredPos.z + ")");
 
     }
 
