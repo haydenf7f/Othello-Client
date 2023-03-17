@@ -15,7 +15,7 @@ public class Disc : MonoBehaviour{
     }
 
     public void Flip() {
-        Debug.Log("Flipping disc at position: " + "(" + transform.position.z + ", " + transform.position.x + ")");
+        // Debug.Log("Flipping disc at position: " + "(" + transform.position.z + ", " + transform.position.x + ")");
 
         // If Black is face up, play the animation to flip to white
         if (faceUp == Player.Black) {

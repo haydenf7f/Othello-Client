@@ -15,6 +15,8 @@ public class Client : MonoBehaviour
     public int clientID = 0;
     public TCP tcp;
 
+    private bool isConnected = false;
+
     private delegate void PacketHandler(Packet _packet);
     private static Dictionary<int, PacketHandler> packetHandlers;
 
@@ -37,10 +39,18 @@ public class Client : MonoBehaviour
         tcp = new TCP();
     }
 
+    private void OnApplicationQuit()
+    {
+        Disconnect();
+    }
+
     // ConnectToServer function initializes client data and connects to server
     public void ConnectToServer() {
         // Initialize client data
         InitializeClientData();
+
+        isConnected = true;
+        
         // Connect to server using TCP object
         tcp.Connect();
     }
@@ -115,7 +125,7 @@ public class Client : MonoBehaviour
                 // If no bytes were received, return
                 if (_byteLength <= 0) 
                 {
-                    // TODO: Disconnect
+                    instance.Disconnect();
                     return;
                 }
                 // Copy the received data into a new byte array
@@ -129,7 +139,7 @@ public class Client : MonoBehaviour
             }
             catch (Exception _ex) {
                 Debug.Log($"Error receiving TCP data: {_ex}");
-                // TODO: Disconnect
+                Disconnect();
             }
         }
 
@@ -177,6 +187,18 @@ public class Client : MonoBehaviour
 
             return false;
         }
+
+        private void Disconnect()
+        {
+            // Close socket and stream
+            stream = null;
+            socket.Close();
+
+            // Reset received data object
+            receivedData = null;
+            // Reset receive buffer
+            reveiveBuffer = null;
+        }
     }
 
     private void InitializeClientData() {
@@ -185,5 +207,16 @@ public class Client : MonoBehaviour
             {(int)ServerPackets.welcome, ClientHandle.Welcome}
         };
         Debug.Log("Initialized packets.");
+    }
+
+    private void Disconnect()
+    {
+        if (isConnected)
+        {
+            isConnected = false;
+            tcp.socket.Close();
+
+            Debug.Log("Disconnected from server.");
+        }
     }
 }
