@@ -4,7 +4,9 @@ using UnityEngine;
 using System.IO;
 using UnityEngine.Networking;
 
-using System.Linq;public class BackgroundMusic : MonoBehaviour {
+using System.Linq;
+
+public class BackgroundMusic : MonoBehaviour {
     private static BackgroundMusic instance = null;
     private AudioSource audioSource;
     private List<AudioClip> clips;
