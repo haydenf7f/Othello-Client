@@ -13,7 +13,7 @@ public class ClientSend : MonoBehaviour
     #region Packets
     public static void WelcomeReceived()
     {
-        using (Packet _packet = new Packet((int)ClientPackets.welcomeReceived))
+        using (Packet _packet = new Packet((int)ClientPackets.WelcomeReceived))
         {
             _packet.Write(Client.instance.clientID);
             _packet.Write(MenuManager.instance.usernameField.text);
@@ -21,6 +21,7 @@ public class ClientSend : MonoBehaviour
             SendTCPData(_packet);
         }
     }
+    
     #endregion
 }
     

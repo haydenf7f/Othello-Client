@@ -202,9 +202,10 @@ public class Client : MonoBehaviour
     }
 
     private void InitializeClientData() {
-        // Initialize dictionary with a single entry for a welcome packet
         packetHandlers = new Dictionary<int, PacketHandler>() {
-            {(int)ServerPackets.welcome, ClientHandle.Welcome}
+            { (int)ServerPackets.Welcome, ClientHandle.Welcome },
+            { (int)ServerPackets.StartGame, ClientHandle.StartGame },
+            { (int)ServerPackets.GameUpdate, ClientHandle.GameUpdate }
         };
         Debug.Log("Initialized packets.");
     }

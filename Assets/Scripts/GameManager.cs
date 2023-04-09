@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
     private List<GameObject> highlights = new List<GameObject>();
 
     // Start is called before the first frame update
-    void Start()
+    public void Start()
     {   
         // Add the disc prefabs to the dictionary
         discPrefabs[Player.Black] = discBlackUp;
@@ -128,7 +128,6 @@ public class GameManager : MonoBehaviour
         discs[boardPos.Row, boardPos.Column] = Instantiate(prefab, centeredPos, Quaternion.identity);
 
         // Debug.Log("Placing disc at [" + boardPos.Row + ", " + boardPos.Column + "]" + " (" + centeredPos.x + ", " + centeredPos.z + ")");
-
     }
 
     private void AddStarterDiscs() {

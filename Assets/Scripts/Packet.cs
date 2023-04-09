@@ -7,13 +7,17 @@ using UnityEngine;
 /// <summary>Sent from server to client.</summary>
 public enum ServerPackets
 {
-    welcome = 1
+    Welcome = 1,
+    ServerMessage,
+    StartGame,
+    GameUpdate,
 }
 
 /// <summary>Sent from client to server.</summary>
 public enum ClientPackets
 {
-    welcomeReceived = 1
+    WelcomeReceived = 1,
+    PlayerMove,
 }
 
 public class Packet : IDisposable
