@@ -25,9 +25,13 @@ public class GameManager : MonoBehaviour
     private Disc[,] discs = new Disc[8, 8];
     private List<GameObject> highlights = new List<GameObject>();
 
+    public int localPlayerID;
+
     // Start is called before the first frame update
     public void Start()
-    {   
+    { 
+        localPlayerID = Client.instance.clientID;
+
         // Add the disc prefabs to the dictionary
         discPrefabs[Player.Black] = discBlackUp;
         discPrefabs[Player.White] = discWhiteUp;
@@ -44,7 +48,7 @@ public class GameManager : MonoBehaviour
             Application.Quit();
         }
 
-        if (Input.GetMouseButtonDown(0)) {
+        if (Input.GetMouseButtonDown(0) && gameState.CurrentPlayer == (Player)localPlayerID) {
 
             // Use a raycast from the camera to the mouse position to get the position on the board
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
@@ -61,6 +65,7 @@ public class GameManager : MonoBehaviour
     private void OnBoardClicked(Position pos) {
         if (gameState.MakeMove(pos, out MoveInfo moveInfo)) {
             StartCoroutine(OnMoveMade(moveInfo));
+            ClientSend.PlayerMove(moveInfo);
         }
     }
 

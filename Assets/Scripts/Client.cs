@@ -14,6 +14,7 @@ public class Client : MonoBehaviour
     public int port = 23960;
     public int clientID = 0;
     public TCP tcp;
+    public Player player;
 
     private bool isConnected = false;
 

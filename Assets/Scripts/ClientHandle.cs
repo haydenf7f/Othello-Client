@@ -25,12 +25,31 @@ public class ClientHandle : MonoBehaviour
     public static void StartGame(Packet _packet)
     {
         string _msg = _packet.ReadString();
+        int _clientID = _packet.ReadInt();
+
         Debug.Log($"Received a start game request from server: {_msg}");
         SceneManager.LoadScene("Game");
     }
 
     public static void GameUpdate(Packet _packet)
     {
-        // TODO: Implement
+        int row = _packet.ReadInt();
+        int column = _packet.ReadInt();
+        Position position = new Position(row, column);
+        int player = _packet.ReadInt();
+        int outflankedCount = _packet.ReadInt();
+        List<Position> outflanked = new List<Position>();
+
+        for (int i = 0; i < outflankedCount; i++)
+        {
+            int outflankedRow = _packet.ReadInt();
+            int outflankedColumn = _packet.ReadInt();
+            outflanked.Add(new Position(outflankedRow, outflankedColumn));
+        }
+
+        MoveInfo moveInfo = new MoveInfo { Player = (Player)player, Position = position, Outflanked = outflanked };
+        
+        // TODO: Somehow update the client game board with this move info
+        
     }
 }
