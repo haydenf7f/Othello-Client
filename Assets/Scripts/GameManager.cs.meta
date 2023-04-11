@@ -3,7 +3,12 @@ guid: 48c7d0e7b470bfe4ea6c305e4793c18f
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - cam: {instanceID: 0}
+  - discBlackUp: {fileID: 8922031232331130990, guid: bdd39089ba4a04d4689f09cf2cdab407, type: 3}
+  - discWhiteUp: {fileID: 8922031232331130990, guid: 80fb594c618fe0642b672b9971081a24, type: 3}
+  - highlightPrefab: {fileID: 3749694887892770230, guid: 3ee6c3e1836593a4d88cefe23521da4f, type: 3}
+  - uiManager: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

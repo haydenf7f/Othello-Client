@@ -151,6 +151,8 @@ public class Client : MonoBehaviour
             // Set received data object bytes to the received data
             receivedData.SetBytes(_data);
 
+            Debug.Log($"Received data length: {receivedData.Length()}");
+
             // Check if received data contains more than 4 unread bytes (size of int)
             if (receivedData.UnreadLength() >= 4) {
                 // Read the packet length from the received data
@@ -160,12 +162,15 @@ public class Client : MonoBehaviour
                 }
             }
 
+            Debug.Log($"Packet length: {_packetLength}");
+
             // Loop through packets in received data and execute corresponding PacketHandlers
             while (_packetLength > 0 && _packetLength <= receivedData.UnreadLength()) {
                 byte[] _packetBytes = receivedData.ReadBytes(_packetLength);
                 ThreadManager.ExecuteOnMainThread(() => {
-                    using (Packet _packet = new Packet(_packetBytes)) {
+                    using (Packet _packet = new Packet(_packetBytes)) {         
                         int _packetID = _packet.ReadInt();
+                        Debug.Log($"Received packet with ID: {_packetID}");
                         packetHandlers[_packetID](_packet);
                     }
                 });
@@ -205,6 +210,7 @@ public class Client : MonoBehaviour
     private void InitializeClientData() {
         packetHandlers = new Dictionary<int, PacketHandler>() {
             { (int)ServerPackets.Welcome, ClientHandle.Welcome },
+            { (int)ServerPackets.ServerMessage, ClientHandle.ServerMessage },
             { (int)ServerPackets.StartGame, ClientHandle.StartGame },
             { (int)ServerPackets.GameUpdate, ClientHandle.GameUpdate }
         };

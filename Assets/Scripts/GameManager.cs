@@ -26,6 +26,20 @@ public class GameManager : MonoBehaviour
     private List<GameObject> highlights = new List<GameObject>();
 
     public int localPlayerID;
+    public static GameManager instance;
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else if (instance != this)
+        {
+            Debug.LogError("More than one GameManager instance found!");
+            Destroy(gameObject);
+        }
+    }
 
     // Start is called before the first frame update
     public void Start()
@@ -62,6 +76,13 @@ public class GameManager : MonoBehaviour
         }  
     }
 
+    public void UpdateBoardWithMove(Position pos)
+    {
+        if (gameState.MakeMove(pos, out MoveInfo moveInfo)) {
+            StartCoroutine(OnMoveMade(moveInfo));
+        }
+    }
+
     private void OnBoardClicked(Position pos) {
         if (gameState.MakeMove(pos, out MoveInfo moveInfo)) {
             StartCoroutine(OnMoveMade(moveInfo));
@@ -85,6 +106,7 @@ public class GameManager : MonoBehaviour
         foreach (Position pos in gameState.LegalMoves.Keys) {
             Vector3 scenePos = CenteredCoordinatePos(pos) + Vector3.up * 0.01f;
             GameObject highlight = Instantiate(highlightPrefab, scenePos, Quaternion.identity);
+            highlight.transform.SetParent(GameObject.Find("GameManager").transform);
             highlights.Add(highlight);
         }
     }
@@ -131,6 +153,7 @@ public class GameManager : MonoBehaviour
 
         // Instantiate the disc at the given position and store it in the discs array
         discs[boardPos.Row, boardPos.Column] = Instantiate(prefab, centeredPos, Quaternion.identity);
+        discs[boardPos.Row, boardPos.Column].transform.SetParent(GameObject.Find("GameManager").transform);
 
         // Debug.Log("Placing disc at [" + boardPos.Row + ", " + boardPos.Column + "]" + " (" + centeredPos.x + ", " + centeredPos.z + ")");
     }

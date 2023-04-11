@@ -33,6 +33,8 @@ public class ClientHandle : MonoBehaviour
 
     public static void GameUpdate(Packet _packet)
     {
+        Debug.Log($"Receiving a game update from server...");
+
         int row = _packet.ReadInt();
         int column = _packet.ReadInt();
         Position position = new Position(row, column);
@@ -48,8 +50,10 @@ public class ClientHandle : MonoBehaviour
         }
 
         MoveInfo moveInfo = new MoveInfo { Player = (Player)player, Position = position, Outflanked = outflanked };
+
+        Debug.Log($"The other player made a move at {position.Row}, {position.Column}! (Player: {player}");
         
-        // TODO: Somehow update the client game board with this move info
-        
+        GameManager.instance.UpdateBoardWithMove(position);   
     }
 }
+
