@@ -18,15 +18,12 @@ public class ClientHandle : MonoBehaviour
     public static void ServerMessage(Packet _packet)
     {
         string _msg = _packet.ReadString();
-        int _clientID = _packet.ReadInt();
         Debug.Log($"Message from server: {_msg}");
     }
 
     public static void StartGame(Packet _packet)
     {
         string _msg = _packet.ReadString();
-        int _clientID = _packet.ReadInt();
-
         Debug.Log($"Received a start game request from server: {_msg}");
         SceneManager.LoadScene("Game");
     }
@@ -51,7 +48,7 @@ public class ClientHandle : MonoBehaviour
 
         MoveInfo moveInfo = new MoveInfo { Player = (Player)player, Position = position, Outflanked = outflanked };
 
-        Debug.Log($"The other player made a move at {position.Row}, {position.Column}! (Player: {player}");
+        Debug.Log($"The other player made a move at ({position.Row}, {position.Column})! (Player: {player})");
         
         GameManager.instance.UpdateBoardWithMove(position);   
     }

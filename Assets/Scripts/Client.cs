@@ -168,7 +168,8 @@ public class Client : MonoBehaviour
             while (_packetLength > 0 && _packetLength <= receivedData.UnreadLength()) {
                 byte[] _packetBytes = receivedData.ReadBytes(_packetLength);
                 ThreadManager.ExecuteOnMainThread(() => {
-                    using (Packet _packet = new Packet(_packetBytes)) {         
+                    Debug.Log("Executing action on main thread...");
+                    using (Packet _packet = new Packet(_packetBytes)) {        
                         int _packetID = _packet.ReadInt();
                         Debug.Log($"Received packet with ID: {_packetID}");
                         packetHandlers[_packetID](_packet);

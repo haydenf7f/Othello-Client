@@ -8,6 +8,22 @@ public class ThreadManager : MonoBehaviour
     private static readonly List<Action> executeCopiedOnMainThread = new List<Action>();
     private static bool actionToExecuteOnMainThread = false;
 
+    public static ThreadManager instance;
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else if (instance != this)
+        {
+            Debug.LogWarning("Multiple instances of ThreadManager found, destroying one.");
+            Destroy(gameObject);
+        }
+    }
+    
     private void Update()
     {
         UpdateMain();
