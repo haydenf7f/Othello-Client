@@ -61,6 +61,7 @@ public class GameState {
 
         // If the move is legal, store the current player.
         Player movePlayer = CurrentPlayer;
+        
         // Get the outflanked positions from the dictionary of legal moves
         List<Position> outflankedPositions = LegalMoves[pos];
 
