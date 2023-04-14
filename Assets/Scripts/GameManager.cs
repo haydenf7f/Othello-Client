@@ -59,7 +59,7 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape)) {
-            Application.Quit();
+            EscapeMenu.instance.Pause();
         }
 
         if (Input.GetMouseButtonDown(0) && gameState.CurrentPlayer == (Player)localPlayerID) {

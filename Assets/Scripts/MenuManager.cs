@@ -81,6 +81,11 @@ public class MenuManager : MonoBehaviour
         Client.instance.ConnectToServer();
     }
 
+    // public void Disconnect() 
+    // {
+    //     Client.instance.Disconnect();
+    // }
+
     public void SetResolution(int resolutionIndex)
     {
         Resolution resolution = resolutions[resolutionIndex];
