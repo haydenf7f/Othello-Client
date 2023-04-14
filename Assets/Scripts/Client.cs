@@ -50,6 +50,7 @@ public class Client : MonoBehaviour
         // Initialize client data
         InitializeClientData();
 
+
         isConnected = true;
         
         // Connect to server using TCP object
@@ -218,7 +219,7 @@ public class Client : MonoBehaviour
         Debug.Log("Initialized packets.");
     }
 
-    private void Disconnect()
+    public void Disconnect()
     {
         if (isConnected)
         {

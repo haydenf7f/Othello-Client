@@ -51,25 +51,40 @@ public class BackgroundMusic : MonoBehaviour {
         Invoke("PlayNextClip", audioSource.clip.length);
     }
 
-    List<AudioClip> LoadClipsFromFolder(string folderPath) {
-        List<AudioClip> clips = new List<AudioClip>();
-        string[] fileEntries = Directory.GetFiles(Application.dataPath + "/" + folderPath);
+    // List<AudioClip> LoadClipsFromFolder(string folderPath) {
+    //     List<AudioClip> clips = new List<AudioClip>();
+    //     string[] fileEntries = Directory.GetFiles(Application.dataPath + "/" + folderPath);
 
-        foreach (string filePath in fileEntries) {
-            // Ignore meta files
-            if (filePath.EndsWith(".meta")) {
-                continue;
-            }
-            else if(filePath.EndsWith(".mp3") || filePath.EndsWith(".wav")) {
-                // Load the clip and add it to the list
-                UnityWebRequest www = UnityWebRequestMultimedia.GetAudioClip("file://" + filePath, AudioType.UNKNOWN);
-                www.SendWebRequest();
-                while (!www.isDone) { }
-                if (www.result == UnityWebRequest.Result.Success) {
-                    AudioClip clip = DownloadHandlerAudioClip.GetContent(www);
-                    clips.Add(clip);
-                }
-            }
+    //     foreach (string filePath in fileEntries) {
+    //         // Ignore meta files
+    //         if (filePath.EndsWith(".meta")) {
+    //             continue;
+    //         }
+    //         else if(filePath.EndsWith(".mp3") || filePath.EndsWith(".wav")) {
+    //             // Load the clip and add it to the list
+    //             UnityWebRequest www = UnityWebRequestMultimedia.GetAudioClip("file://" + filePath, AudioType.UNKNOWN);
+    //             www.SendWebRequest();
+    //             while (!www.isDone) { }
+    //             if (www.result == UnityWebRequest.Result.Success) {
+    //                 AudioClip clip = DownloadHandlerAudioClip.GetContent(www);
+    //                 clips.Add(clip);
+    //             }
+    //         }
+    //     }
+
+    //     return clips;
+    // }
+
+    List<AudioClip> LoadClipsFromFolder(string folderPath)
+    {
+        List<AudioClip> clips = new List<AudioClip>();
+
+        // Load all AudioClip files from the specified folder in the Resources folder
+        AudioClip[] audioClips = Resources.LoadAll<AudioClip>(folderPath);
+
+        foreach (AudioClip clip in audioClips)
+        {
+            clips.Add(clip);
         }
 
         return clips;

@@ -21,7 +21,9 @@ public class Highlight : MonoBehaviour
 
     private void OnMouseEnter() {
         // Set the hover color
-        material.color = hoverColor;
+        if (GameManager.gameState.CurrentPlayer == (Player)Client.instance.clientID) {
+            material.color = hoverColor;
+        } 
     }
 
     private void OnMouseExit() {

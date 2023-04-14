@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
     private UIManager uiManager;
 
     private Dictionary<Player, Disc> discPrefabs = new Dictionary<Player, Disc>();
-    private GameState gameState = new GameState();
+    public static GameState gameState = new GameState();
     private Disc[,] discs = new Disc[8, 8];
     private List<GameObject> highlights = new List<GameObject>();
 
@@ -59,7 +59,7 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape)) {
-            Application.Quit();
+            EscapeMenu.instance.Pause();
         }
 
         if (Input.GetMouseButtonDown(0) && gameState.CurrentPlayer == (Player)localPlayerID) {
