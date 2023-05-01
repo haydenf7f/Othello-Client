@@ -214,7 +214,8 @@ public class Client : MonoBehaviour
             { (int)ServerPackets.Welcome, ClientHandle.Welcome },
             { (int)ServerPackets.ServerMessage, ClientHandle.ServerMessage },
             { (int)ServerPackets.StartGame, ClientHandle.StartGame },
-            { (int)ServerPackets.GameUpdate, ClientHandle.GameUpdate }
+            { (int)ServerPackets.GameUpdate, ClientHandle.GameUpdate },
+            { (int)ServerPackets.PlayerDisconnected, ClientHandle.PlayerDisconnected }
         };
         Debug.Log("Initialized packets.");
     }

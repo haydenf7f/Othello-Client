@@ -25,20 +25,18 @@ public class EscapeMenu : MonoBehaviour
 
     public void Pause()
     {
-        Time.timeScale = 0;
         escapeMenu.SetActive(true);
     }
 
     public void Resume()
     {
-        Time.timeScale = 1;
         escapeMenu.SetActive(false);
     }
 
     public void MainMenu()
     {
-        Time.timeScale = 1;
         Client.instance.Disconnect();
+        GameManager.instance.ResetGameState();
         SceneManager.LoadScene("MainMenu");
     }
 

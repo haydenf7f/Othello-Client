@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour
 
     // Start is called before the first frame update
     public void Start()
-    { 
+    {
         localPlayerID = Client.instance.clientID;
 
         // Add the disc prefabs to the dictionary
@@ -251,6 +251,40 @@ public class GameManager : MonoBehaviour
             discs[pos.Row, pos.Column].Jump();
             yield return new WaitForSeconds(0.05f);
         }
+    }
+
+    public bool isGameOver() {
+        return gameState.GameOver;
+    }
+
+    public void ResetGameState()
+    {
+        gameState = new GameState();
+        ClearDiscsAndHighlights();
+        AddStarterDiscs();
+        ShowLegalMoves();
+        uiManager.SetPlayerText(gameState.CurrentPlayer);
+    }
+
+    private void ClearDiscsAndHighlights()
+    {
+        for (int row = 0; row < 8; row++)
+        {
+            for (int col = 0; col < 8; col++)
+            {
+                if (discs[row, col] != null)
+                {
+                    Destroy(discs[row, col].gameObject);
+                    discs[row, col] = null;
+                }
+            }
+        }
+
+        foreach (GameObject highlight in highlights)
+        {
+            Destroy(highlight);
+        }
+        highlights.Clear();
     }
 
     private IEnumerator RestartGame() {

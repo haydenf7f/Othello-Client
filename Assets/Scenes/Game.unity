@@ -2355,7 +2355,7 @@ GameObject:
   - component: {fileID: 614608494}
   - component: {fileID: 614608493}
   m_Layer: 5
-  m_Name: PlayAgainButton
+  m_Name: ReturnToMainMenuButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2426,9 +2426,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1022313342}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: OnPlayAgainClicked
+      - m_Target: {fileID: 1698111387}
+        m_TargetAssemblyTypeName: EscapeMenu, Assembly-CSharp
+        m_MethodName: MainMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3926,7 +3926,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Play Again
+  m_text: 'Return To Main Menu
 
 '
   m_isRightToLeft: 0
@@ -3955,8 +3955,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 54
-  m_fontSizeBase: 54
+  m_fontSize: 26.6
+  m_fontSizeBase: 26.6
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -5384,7 +5384,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: <sprite name=DiscWhiteUp> 0
+  m_text: <sprite name=DiscWhiteUp>0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6504396f21e720f4a828e7ef4515a554, type: 2}
   m_sharedMaterial: {fileID: -8392475000935412793, guid: 6504396f21e720f4a828e7ef4515a554, type: 2}
@@ -6261,7 +6261,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: <sprite name=DiscBlackUp> 0
+  m_text: <sprite name=DiscBlackUp>0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6504396f21e720f4a828e7ef4515a554, type: 2}
   m_sharedMaterial: {fileID: -8392475000935412793, guid: 6504396f21e720f4a828e7ef4515a554, type: 2}

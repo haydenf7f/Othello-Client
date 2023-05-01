@@ -9,9 +9,10 @@ public class MenuManager : MonoBehaviour
 {
     public string newGameScene;
 
+    [SerializeField] private GameObject playerDisconnectedDialogue;
 
     [Header("Audio Settings")]
-    [SerializeField] private float defaultVolume = 0.5f;
+    [SerializeField] private float defaultVolume = 0.02f;
     [SerializeField] private TMP_Text masterVolumeTextValue = null;
     [SerializeField] private Slider masterVolumeSlider = null;
 
@@ -81,10 +82,11 @@ public class MenuManager : MonoBehaviour
         Client.instance.ConnectToServer();
     }
 
-    // public void Disconnect() 
-    // {
-    //     Client.instance.Disconnect();
-    // }
+    public void PlayerDisconnected()
+    {
+        playerDisconnectedDialogue.SetActive(true);
+    }
+
 
     public void SetResolution(int resolutionIndex)
     {
