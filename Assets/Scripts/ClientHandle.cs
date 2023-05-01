@@ -57,27 +57,10 @@ public class ClientHandle : MonoBehaviour
         string _msg = _packet.ReadString();
         Debug.Log(_msg);
 
-        GameManager.instance.StartCoroutine(HandlePlayerDisconnected());
-    }
-
-    public static IEnumerator HandlePlayerDisconnected() {
         // If the game is over, then we don't need to notify the player that the other player disconnected
-        if (GameManager.instance.isGameOver()) { yield break; }
+        if (GameManager.instance.isGameOver()) { return; }
 
-        Client.instance.Disconnect();
-        GameManager.instance.ResetGameState();
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("MainMenu");
-
-        // Wait until the scene is loaded
-        while (!asyncLoad.isDone)
-        {
-            yield return null;
-        }
-
-        // Make sure the new instance of MenuManager is assigned
-        yield return new WaitForEndOfFrame();
-
-        MenuManager.instance.PlayerDisconnected(); 
+        EscapeMenu.instance.PlayerDisconnectedPopup();
     }
 }
 

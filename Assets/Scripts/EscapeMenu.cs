@@ -8,6 +8,8 @@ public class EscapeMenu : MonoBehaviour
 
     [SerializeField] GameObject escapeMenu;
 
+    [SerializeField] GameObject playerDisconnectedMenu;
+
     public static EscapeMenu instance;
 
     private void Awake()
@@ -38,6 +40,11 @@ public class EscapeMenu : MonoBehaviour
         Client.instance.Disconnect();
         GameManager.instance.ResetGameState();
         SceneManager.LoadScene("MainMenu");
+    }
+
+    public void PlayerDisconnectedPopup()
+    {
+        playerDisconnectedMenu.SetActive(true);
     }
 
     public void Quit()
